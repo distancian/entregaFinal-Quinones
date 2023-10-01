@@ -1,6 +1,7 @@
 
 from django.urls import path
-from wine_app.views import  detalles_producto, about, registrar, login_view, listarVendedores ,cliente, buscar, busquedaProducto, vendedor, producto, listar_clientes, listar_productos, listar_vendedores, inicio, agregar_producto, agregar_cliente, agregar_vendedor
+from wine_app.views import page_not_found_view, detalles_producto, about, registrar, login_view, listarVendedores ,cliente, buscar, busquedaProducto, vendedor, producto, listar_clientes, listar_productos, listar_vendedores, inicio, agregar_producto, agregar_cliente, agregar_vendedor
+from django.conf.urls import handler404
 from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
@@ -20,16 +21,18 @@ urlpatterns = [
     path('logout', LogoutView.as_view(template_name='logout.html'), name= "Logout"),
     path('about', about, name='about'),
     path('detalles_producto/<int:producto_id>/', detalles_producto, name='detalles_producto'),
+    path('buscar', buscar, name='buscar'),
+    path('inicio', inicio, name='inicio'),
+]
+
+handler404 = page_not_found_view
 
     
 
 
 
 
-    path('buscar', buscar, name='buscar'),
-    path('inicio', inicio, name='inicio'),
 
-]
 
 
     # path('listaCursos/', CursoList.as_view() , name= "ListarCursos"),

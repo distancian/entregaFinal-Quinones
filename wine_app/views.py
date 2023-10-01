@@ -14,6 +14,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponseNotFound
 
 # Create your views here.
 
@@ -41,6 +42,7 @@ def vendedor(req, nombre, apellido, legajo):
 
 ################### funciones agregar #########################
 
+@login_required(login_url='/wine_app/login')
 def agregar_producto(req):
 
     print('method', req.method)
@@ -52,6 +54,7 @@ def agregar_producto(req):
 
     else:  
         return render(req, "agregar_producto.html")
+
 
 def agregar_cliente(req):
 
@@ -65,6 +68,8 @@ def agregar_cliente(req):
     else:  
         return render(req, "agregar_cliente.html")
     
+    
+@login_required(login_url='/wine_app/login')
 def agregar_vendedor(req):
 
     print('method', req.method)
@@ -173,3 +178,8 @@ def about(request):
 def detalles_producto(request, producto_id):
     producto = get_object_or_404(Productos, id=producto_id)
     return render(request, 'detalles_producto.html', {'producto': producto})
+
+################### no existe  #########################
+
+def page_not_found_view(request, exception):
+    return render(request, '404.html', status=404)
