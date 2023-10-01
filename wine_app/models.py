@@ -35,7 +35,8 @@ class Productos(models.Model):
     bodega = models.CharField(max_length=40)
     etiqueta = models.CharField(max_length=40)
     precio = models.IntegerField()
-
+    detalle = models.TextField()
+    
     def __str__(self):
         return f'{self.bodega} - {self.etiqueta}'
 

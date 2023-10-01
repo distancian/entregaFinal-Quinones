@@ -13,6 +13,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
+from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
 
@@ -167,3 +168,8 @@ def about(request):
     }
     return render(request, 'about.html', context)
 
+################### detalle producto  #########################
+
+def detalles_producto(request, producto_id):
+    producto = get_object_or_404(Productos, id=producto_id)
+    return render(request, 'detalles_producto.html', {'producto': producto})

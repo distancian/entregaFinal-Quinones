@@ -1,6 +1,6 @@
 
 from django.urls import path
-from wine_app.views import  about, registrar, login_view, listarVendedores ,cliente, buscar, busquedaProducto, vendedor, producto, listar_clientes, listar_productos, listar_vendedores, inicio, agregar_producto, agregar_cliente, agregar_vendedor
+from wine_app.views import  detalles_producto, about, registrar, login_view, listarVendedores ,cliente, buscar, busquedaProducto, vendedor, producto, listar_clientes, listar_productos, listar_vendedores, inicio, agregar_producto, agregar_cliente, agregar_vendedor
 from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
@@ -19,6 +19,7 @@ urlpatterns = [
     path('registrar', registrar, name= "Registrar"),
     path('logout', LogoutView.as_view(template_name='logout.html'), name= "Logout"),
     path('about', about, name='about'),
+    path('detalles_producto/<int:producto_id>/', detalles_producto, name='detalles_producto'),
 
     
 

@@ -23,7 +23,12 @@
     <ul>
        
         {% for producto in listar_productos %}
-            <li>{{producto.bodega}} {{producto.etiqueta}} {{producto.precio}}</li>
+            <li>
+                <a href="{% url 'detalles_producto' producto.id %}">
+                    {{ producto.bodega }} {{ producto.etiqueta }} {{ producto.precio }}
+                </a>
+
+            </li>
         {% endfor %}
             
     </ul>
