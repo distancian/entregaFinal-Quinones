@@ -1,11 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Página no encontrada</title>
-</head>
+{% extends 'padre.html' %}
+
+
+{% block tituloCambia %}
+<title>Página no encontrada</title>
+
 <body>
     <h1>Lo siento, la página que buscas no existe.</h1>
 
     <a class="nav-link" href="{% url 'inicio' %}">Volver</a></li>
 </body>
-</html>
+
+{% endblock tituloCambia %}
+
+

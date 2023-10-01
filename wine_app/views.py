@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpRequest
 from .models import Productos, Clientes, Vendedores
+from django.contrib import messages
+from .forms import MensajeForm
 
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -183,3 +185,17 @@ def detalles_producto(request, producto_id):
 
 def page_not_found_view(request, exception):
     return render(request, '404.html', status=404)
+
+################### contactenos  #########################
+
+
+def enviar_mensaje(request):
+    if request.method == 'POST':
+        form = MensajeForm(request.POST)
+        if form.is_valid():
+            messages.success(request, 'Mensaje enviado correctamente.')
+            return redirect('/wine_app/contacto')
+    else:
+        form = MensajeForm()
+
+    return render(request, 'contacto.html', {'form': form})

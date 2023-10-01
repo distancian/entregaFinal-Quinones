@@ -1,0 +1,29 @@
+
+{% extends 'padre.html' %}
+
+
+{% block tituloCambia %}
+<title>Inicio</title>
+{% endblock tituloCambia %}
+
+{% block cambioCenter %}
+
+
+<form method="post" action="{% url 'contacto' %}">{% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Enviar Mensaje</button>
+</form>
+
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+
+
+{% endblock cambioCenter %}
+
+

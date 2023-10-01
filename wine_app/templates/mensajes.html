@@ -1,0 +1,35 @@
+
+{% extends 'padre.html' %}
+
+
+{% block tituloCambia %}
+<title>Inicio</title>
+{% endblock tituloCambia %}
+
+{% block cambioCenter %}
+
+
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<!-- Aquí va el formulario -->
+<form method="post" action="{% url 'enviar_mensaje' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Enviar Mensaje</button>
+</form>
+
+{% endblock cambioCenter %}
+
+
+
+
+
+
+
+
