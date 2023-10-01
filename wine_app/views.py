@@ -24,6 +24,7 @@ from django.http import HttpResponseNotFound
 
 ################### funciones  #########################
 
+@login_required(login_url='/wine_app/login')
 def cliente(req, nombre, apellido, dni, mail ):
     cliente = Clientes(nombre=nombre, apellido=apellido, dni=dni, mail=mail)
     cliente.save()
@@ -36,6 +37,7 @@ def producto(req, bodega, etiqueta, precio):
     return HttpResponse(f'''
     <p>Bodega: {producto.bodega} - etiqueta: {producto.etiqueta} creado con exito!</P>''')  
 
+@login_required(login_url='/wine_app/login')
 def vendedor(req, nombre, apellido, legajo):
     vendedor = Vendedores(nombre=nombre, apellido=apellido, legajo=legajo)
     vendedor.save()
@@ -57,7 +59,7 @@ def agregar_producto(req):
     else:  
         return render(req, "agregar_producto.html")
 
-
+@login_required(login_url='/wine_app/login')
 def agregar_cliente(req):
 
     print('method', req.method)
@@ -70,7 +72,7 @@ def agregar_cliente(req):
     else:  
         return render(req, "agregar_cliente.html")
     
-    
+staff_member_required
 @login_required(login_url='/wine_app/login')
 def agregar_vendedor(req):
 
@@ -88,12 +90,17 @@ def agregar_vendedor(req):
 
 def inicio(req):
     return render(req, "inicio.html")    
+
+@login_required(login_url='/wine_app/login')
 def listar_clientes(req):
     lista = Clientes.objects.all()
     return render(req, "listar_clientes.html", {"listar_clientes": lista})
+
 def listar_productos(req):
     lista = Productos.objects.all()
     return render(req, "listar_productos.html", {"listar_productos": lista})
+
+@login_required(login_url='/wine_app/login')
 def listar_vendedores(req):
     lista = Vendedores.objects.all()
     return render(req, "listar_vendedores.html", {"listar_vendedores": lista})
@@ -199,3 +206,10 @@ def enviar_mensaje(request):
         form = MensajeForm()
 
     return render(request, 'contacto.html', {'form': form})
+
+
+
+
+
+##############PENDIENTE###############
+#no esta funcionando el registrar, crea el usuario pero no se puede loguear.
