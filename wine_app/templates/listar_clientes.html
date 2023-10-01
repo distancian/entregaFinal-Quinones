@@ -1,0 +1,38 @@
+{% extends 'padre.html' %}
+
+
+{% block tituloCambia %}
+<title>Listar clientes</title>
+{% endblock tituloCambia %}
+
+{% block cambioCenter %}
+
+
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Listar Clientes</h1>
+        </div>
+    </div>
+</header>
+{% endblock cambioCenter %}
+
+
+
+{% block contenidoQueCambia %}
+<body>
+
+    <ul>
+       
+        {% for cliente in listar_clientes %}
+            <li>{{cliente.nombre}} {{cliente.apellido}}</li>
+        {% endfor %}
+            
+    </ul>
+    
+</body>
+
+{% endblock contenidoQueCambia %}
+
+
+

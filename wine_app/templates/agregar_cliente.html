@@ -1,0 +1,52 @@
+{% extends 'padre.html' %}
+
+
+{% block tituloCambia %}
+<title>agregar cliente</title>
+{% endblock tituloCambia %}
+
+{% block cambioCenter %}
+
+
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-left text-white">
+            <h1 class="display-4 fw-bolder">Agregar Cliente</h1>
+        </div>
+    </div>
+</header>
+{% endblock cambioCenter %}
+
+
+{% block contenidoQueCambia %}
+
+    <form action="{% url 'agregar_cliente' %}" method="post">{% csrf_token %}
+
+        <div style="text-align: left;">
+            <div>
+                <label for="nombre" style="display: inline-block; width: 100px; text-align: left;">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" style="border: 1px solid #007bff; padding: 5px; border-radius: 5px;">
+            </div>
+            <div>
+                <label for="apellido" style="display: inline-block; width: 100px; text-align: left;">Apellido:</label>
+                <input type="text" id="apellido" name="apellido" style="border: 1px solid #007bff; padding: 5px; border-radius: 5px;">
+            </div>
+            
+            <div>
+                <label for="dni" style="display: inline-block; width: 100px; text-align: left;">DNI:</label>
+                <input type="number" id="dni" name="dni" style="border: 1px solid #007bff; padding: 5px; border-radius: 5px;">
+            </div>
+            
+            <div>
+                <label for="mail" style="display: inline-block; width: 100px; text-align: left;">Mail:</label>
+                <input type="email" id="mail" name="mail" style="border: 1px solid #007bff; padding: 5px; border-radius: 5px;">
+            </div>
+        </div>
+        
+        
+
+        <button style="text-align: center;" type="submit"> Enviar </button>
+    </form>
+
+
+{% endblock contenidoQueCambia %}

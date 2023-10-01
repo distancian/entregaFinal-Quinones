@@ -1,0 +1,36 @@
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href="/wine_app/inicio">WineApp</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="/wine_app/inicio">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'listar_productos' %}">Productos</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'listar_clientes' %}">Clientes</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'listar_vendedores' %}">Vendedores</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'agregar_producto' %}">Agregar Producto</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'agregar_cliente' %}">Agregar Cliente</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'agregar_vendedor' %}">Agregar Vendedor</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'busquedaProducto' %}">Buscar Producto</a></li>
+            
+
+                {% if user.is_authenticated %}
+                <p>Bienvenido {{user.username}} </p>
+                <a class="btn btn-primary" href="{% url 'Logout' %}">Logout</a>
+
+                {% else %}  <a class="btn btn-primary" href="{% url 'Login' %}">Login</a>
+                            <a class="btn btn-primary" href="{% url 'Registrar' %}">Registrar</a>
+            
+                {% endif %}
+
+
+                    </ul>
+                </li>
+            </ul>
+            <form class="d-flex">
+                
+            </form>
+        </div>
+    </div>
+</nav>

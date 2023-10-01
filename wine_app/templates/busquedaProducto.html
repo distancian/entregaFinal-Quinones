@@ -1,0 +1,34 @@
+{% extends 'padre.html' %}
+
+
+{% block tituloCambia %}
+<title>Busqueda Producto</title>
+{% endblock tituloCambia %}
+
+
+{% block cambioCenter %}
+
+
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-left text-white">
+            <h1 class="display-4 fw-bolder">Buscar Producto</h1>
+        </div>
+    </div>
+</header>
+{% endblock cambioCenter %}
+
+{% block contenidoQueCambia %}
+
+    <form action="{% url 'buscar' %}" method="get">
+
+        <div style="text-align: left;">
+            <label for="bodega" style="display: inline-block; width: 100px; text-align: left;">Bodega:</label>
+            <input type="text" id="bodega" name="bodega" style="border: 1px solid #007bff; padding: 5px; border-radius: 5px;">
+        </div>
+
+        <button type="submit"> Enviar </button>
+    </form>
+
+
+{% endblock contenidoQueCambia %}

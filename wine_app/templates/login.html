@@ -1,0 +1,18 @@
+{% extends 'padre.html' %}
+
+{% block tituloCambia %}
+<title>Login</title>
+{% endblock tituloCambia %}
+
+{% block contenidoQueCambia %}
+    
+    <form action="{% url 'Login' %}" method="post">{% csrf_token %}
+
+            {{miFormulario.as_p}}
+
+            <button type="submit"> Inciar sesión</button>
+
+    </form>
+
+{% endblock contenidoQueCambia %}
+

@@ -1,0 +1,34 @@
+{% extends 'padre.html' %}
+
+
+{% block tituloCambia %}
+<title>Listar vendedores</title>
+{% endblock tituloCambia %}
+
+{% block cambioCenter %}
+
+
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-white text-lg-start">
+            <h1 class="display-4 fw-bolder">Listar Vendedores</h1>
+        </div>
+    </div>
+</header>
+{% endblock cambioCenter %}
+
+{% block contenidoQueCambia %}
+<body>
+
+    <ul>
+
+        {% for ven in Vendedores %}
+        <li>{{ven.nombre}} {{ven.apellido}} {{ven.legajo}}</li>
+        {% endfor %}
+            
+    </ul>
+    
+</body>
+
+{% endblock contenidoQueCambia %}
+

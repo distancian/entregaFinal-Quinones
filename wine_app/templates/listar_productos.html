@@ -1,0 +1,33 @@
+{% extends 'padre.html' %}
+
+
+{% block tituloCambia %}
+<title>Inicio</title>
+{% endblock tituloCambia %}
+
+{% block cambioCenter %}
+
+
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Listar Productos</h1>
+        </div>
+    </div>
+</header>
+{% endblock cambioCenter %}
+
+{% block contenidoQueCambia %}
+<body>
+
+    <ul>
+       
+        {% for producto in listar_productos %}
+            <li>{{producto.bodega}} {{producto.etiqueta}} {{producto.precio}}</li>
+        {% endfor %}
+            
+    </ul>
+    
+</body>
+
+{% endblock contenidoQueCambia %}

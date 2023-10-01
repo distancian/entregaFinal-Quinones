@@ -1,0 +1,57 @@
+{% extends 'padre.html' %}
+
+
+{% block tituloCambia %}
+<title>Mil Demonios</title>
+{% endblock tituloCambia %}
+
+{% block cambioCenter %}
+
+<br>
+<br>
+
+<div class="container">
+
+<p><h4>{{guitarra.titulo}}</h4></p>
+
+{% if guitarra.imagenInstrumento %}
+    <p><img src="{{guitarra.imagenInstrumento.url}}" alt=""></p>
+{% endif %}
+<p>Marca: {{guitarra.marca}}</p>
+<p>Modelo: {{guitarra.modelo}}</p>
+<p>Descripción: {{guitarra.descripcion}}</p>
+<p>Año: {{guitarra.year}}</p>
+<p>Precio(US$): {{guitarra.precio}}</p>
+<p>Teléfono de Contacto: {{guitarra.telefonoContacto}}</p>
+<p>Email de Contacto: {{guitarra.emailContacto}}</p>
+
+</div>
+<br>
+<div class="container">
+    <h4>Comentarios...</h4>
+    <br>
+    <div class="container">
+    {% if not guitarra.comentarios.all %}
+        No han comentado este instrumento
+    {% else %}
+        {% for comentario in guitarra.comentarios.all %}
+        <p><strong>{{comentario.nombre}}</strong></p>
+        <p>{{comentario.mensaje}}</p>
+        <p><small>{{comentario.fechaComentario}}</small></p>
+        <hr>
+        {% endfor %}
+    {% endif %}
+    <a href="{% url 'comentario' guitarra.pk %}">Agrega un Comentario</a>
+    </div>
+</div>
+<br>
+
+
+{% endblock cambioCenter %}
+
+
+
+
+
+
+
