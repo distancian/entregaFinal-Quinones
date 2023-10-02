@@ -1,6 +1,6 @@
 
 from django.urls import path
-from wine_app.views import enviar_mensaje, page_not_found_view, detalles_producto, about, registrar, login_view, listarVendedores ,cliente, buscar, busquedaProducto, vendedor, producto, listar_clientes, listar_productos, listar_vendedores, inicio, agregar_producto, agregar_cliente, agregar_vendedor
+from wine_app.views import editarPerfil, enviar_mensaje, page_not_found_view, detalles_producto, about, registrar, login_view, listarVendedores ,cliente, buscar, busquedaProducto, vendedor, producto, listar_clientes, listar_productos, listar_vendedores, inicio, agregar_producto, agregar_cliente, agregar_vendedor
 from django.conf.urls import handler404
 from django.contrib.auth.views import LogoutView
 
@@ -24,6 +24,8 @@ urlpatterns = [
     path('buscar', buscar, name='buscar'),
     path('inicio', inicio, name='inicio'),
     path('contacto', enviar_mensaje , name='contacto'),
+    path('editar-perfil', editarPerfil , name='EditarPerfil'),
+
 
 ]
 

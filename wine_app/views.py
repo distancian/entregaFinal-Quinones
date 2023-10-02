@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpRequest
-from .models import Productos, Clientes, Vendedores
+from .models import Productos, Clientes, Vendedores, Avatar
 from django.contrib import messages
-from .forms import MensajeForm
+from .forms import MensajeForm, UserEditForm, UserChangeForm
 
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -72,7 +72,6 @@ def agregar_cliente(req):
     else:  
         return render(req, "agregar_cliente.html")
     
-staff_member_required
 @login_required(login_url='/wine_app/login')
 def agregar_vendedor(req):
 
@@ -89,7 +88,10 @@ def agregar_vendedor(req):
 ################### funciones listar #########################
 
 def inicio(req):
-    return render(req, "inicio.html")    
+    
+    avatar = Avatar.objects.get(user=req.user.id)
+    return render(req, "inicio.html", {"url_avatar": avatar.imagen.url})
+
 
 @login_required(login_url='/wine_app/login')
 def listar_clientes(req):
@@ -211,5 +213,28 @@ def enviar_mensaje(request):
 
 
 
-##############PENDIENTE###############
-#no esta funcionando el registrar, crea el usuario pero no se puede loguear.
+############## editar perfil ###############
+
+def editarPerfil(req):
+
+    usuario = req.user
+
+    if req.method == 'POST':
+   
+        miFormulario = UserEditForm(req.POST, instance=req.user)
+
+        if miFormulario.is_valid():
+            data = miFormulario.cleaned_data
+            usuario.first_name = data["first_name"]
+            usuario.last_name = data["last_name"]
+            usuario.email = data["email"]
+            usuario.set_password(data["password1"])
+            usuario.save()
+
+            return render(req, "inicio.html", {"mensaje": "Datos actualizados con exito"})
+        else:
+            return render(req,"editarPerfil.html", {"miFormulario":miFormulario})        
+
+    else:
+        miFormulario = UserEditForm(instance=usuario)
+        return render(req,"editarPerfil.html", {"miFormulario":miFormulario})        

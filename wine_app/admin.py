@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Vendedores, Productos, Clientes
+from .models import Vendedores, Productos, Clientes, Avatar
 
 admin.site.site_header = "Panel administración WineApp"
 
@@ -19,4 +19,5 @@ class WineAdmin2(admin.ModelAdmin):
 admin.site.register(Vendedores, WineAdmin)
 admin.site.register(Productos, WineAdmin2)
 admin.site.register(Clientes, WineAdmin)
+admin.site.register(Avatar)
 
