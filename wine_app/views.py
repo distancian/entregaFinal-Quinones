@@ -193,6 +193,9 @@ def detalles_producto(request, producto_id):
     producto = get_object_or_404(Productos, id=producto_id)
     return render(request, 'detalles_producto.html', {'producto': producto})
 
+
+
+
 ################### no existe  #########################
 
 def page_not_found_view(request, exception):

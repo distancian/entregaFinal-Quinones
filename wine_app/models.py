@@ -37,6 +37,7 @@ class Productos(models.Model):
     etiqueta = models.CharField(max_length=40)
     precio = models.IntegerField()
     detalle = models.TextField()
+    imagen = models.ImageField(upload_to='avatares')
     
     def __str__(self):
         return f'{self.bodega} - {self.etiqueta}'
@@ -53,5 +54,5 @@ class Avatar(models.Model):
 
 
 
-    
+
 

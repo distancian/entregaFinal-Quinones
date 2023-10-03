@@ -10,9 +10,13 @@
 
 <body>
 
-    <h2>{{ producto.bodega }} {{ producto.etiqueta }} {{ producto.precio }}</h2>
-    <h3>{{ producto.detalle }}</h3>
-    <!-- Agrega otros detalles del producto según sea necesario -->
+    <h2>{{ producto.bodega }} {{ producto.etiqueta }}</h2>
+    <h4> Precio: $ {{ producto.precio }} </h4>
+
+    <img src="{{ producto.imagen.url }}" height="250px" alt="{{ producto.nombre }}">
+
+    <h6>{{ producto.detalle }}</h6>
+    
 
 </body>
 
