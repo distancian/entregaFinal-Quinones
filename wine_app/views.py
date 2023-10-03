@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpRequest
 from .models import Productos, Clientes, Vendedores, Avatar
 from django.contrib import messages
-from .forms import MensajeForm, UserEditForm, UserChangeForm
+from .forms import MensajeForm, UserEditForm, UserChangeForm, AvatarFormulario
 
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -17,6 +17,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseNotFound
+from django.core.exceptions import ObjectDoesNotExist
 
 # Create your views here.
 
@@ -87,11 +88,13 @@ def agregar_vendedor(req):
             
 ################### funciones listar #########################
 
-def inicio(req):
-    
-    avatar = Avatar.objects.get(user=req.user.id)
-    return render(req, "inicio.html", {"url_avatar": avatar.imagen.url})
-
+def inicio(req):  
+        
+    try:
+        avatar = Avatar.objects.get(user=req.user.id)
+        return render(req,"inicio.html", {"url_avatar": avatar.imagen.url})
+    except:
+        return render (req, "inicio.html")
 
 @login_required(login_url='/wine_app/login')
 def listar_clientes(req):
@@ -211,8 +214,6 @@ def enviar_mensaje(request):
 
 
 
-
-
 ############## editar perfil ###############
 
 def editarPerfil(req):
@@ -238,3 +239,21 @@ def editarPerfil(req):
     else:
         miFormulario = UserEditForm(instance=usuario)
         return render(req,"editarPerfil.html", {"miFormulario":miFormulario})        
+
+############## agregar avatar ###############
+
+def agregar_avatar(req):
+
+    if req.method == 'POST':
+   
+        miFormulario = AvatarFormulario(req.POST, req.FILES)
+
+        if miFormulario.is_valid():
+            data = miFormulario.cleaned_data
+            avatar = Avatar(user=req.user, imagen=data["imagen"])
+            avatar.save()
+            return render(req,"inicio.html", {"mensaje": "avatar actualizado con exito"})        
+
+    else:
+        miFormulario = AvatarFormulario()
+        return render(req,"agregarAvatar.html", {"miFormulario":miFormulario})    

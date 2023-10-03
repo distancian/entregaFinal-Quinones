@@ -1,6 +1,6 @@
 
 from django.urls import path
-from wine_app.views import editarPerfil, enviar_mensaje, page_not_found_view, detalles_producto, about, registrar, login_view, listarVendedores ,cliente, buscar, busquedaProducto, vendedor, producto, listar_clientes, listar_productos, listar_vendedores, inicio, agregar_producto, agregar_cliente, agregar_vendedor
+from wine_app.views import editarPerfil, agregar_avatar, enviar_mensaje, page_not_found_view, detalles_producto, about, registrar, login_view, listarVendedores ,cliente, buscar, busquedaProducto, vendedor, producto, listar_clientes, listar_productos, listar_vendedores, inicio, agregar_producto, agregar_cliente, agregar_vendedor
 from django.conf.urls import handler404
 from django.contrib.auth.views import LogoutView
 
@@ -25,6 +25,9 @@ urlpatterns = [
     path('inicio', inicio, name='inicio'),
     path('contacto', enviar_mensaje , name='contacto'),
     path('editar-perfil', editarPerfil , name='EditarPerfil'),
+    path('Agregar-avatar', agregar_avatar , name='AgregarAvatar'),
+
+
 
 
 ]
@@ -34,16 +37,3 @@ handler404 = page_not_found_view
     
 
 
-
-
-
-
-
-    # path('listaCursos/', CursoList.as_view() , name= "ListarCursos"),
-    # path('detalleCurso/<pk>', CursoDetail.as_view() , name= "DetalleCurso"),
-    # path('creaCurso/', CursoCreate.as_view() , name= "CrearCurso"),
-    # path('actualizarCurso/<pk>', CursoUpdate.as_view() , name= "ActualizarCurso"),
-    # path('eliminarCurso/<pk>', CursoDelete.as_view() , name= "EliminarCurso"),
-    # path('registrar', registrar, name= "Registrar"),
-    # path('logout', LogoutView.as_view(template_name='logout.html'), name= "Logout"),
-    # path('editarPerfil/', editarPerfil, name= "EditarPerfil"),
