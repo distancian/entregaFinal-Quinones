@@ -5,7 +5,7 @@ from django.contrib import messages
 from .forms import MensajeForm, UserEditForm, UserChangeForm, AvatarFormulario
 
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import DeleteView, UpdateView, CreateView
@@ -18,6 +18,8 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseNotFound
 from django.core.exceptions import ObjectDoesNotExist
+
+
 
 # Create your views here.
 
@@ -150,7 +152,7 @@ def login_view (req):
                 user = authenticate(username=usuario, password=psw)
                 if user:
                     login(req, user)
-                    return render(req, "inicio.html", {"mensaje": f'Bienvenido {usuario}!'})
+                    return redirect("inicio")
         return render(req, "inicio.html", {"mensaje": f'Datos incorrectos'})
     else:
         miFormulario = AuthenticationForm()

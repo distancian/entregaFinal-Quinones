@@ -8,13 +8,21 @@
 {% block cambioCenter %}
 
 
-<header class="bg-dark py-5">
-    <div class="container px-4 px-lg-5 my-5">
-        <div class="text-center text-white">
-            <h1 class="display-4 fw-bolder">WineApp</h1>
-        </div>
-    </div>
-</header>
+<style>
+
+    header.custom-bg {
+      background-color: #343d34;
+    }
+  </style>
+  
+  <header class="custom-bg py-5">
+      <div class="container px-4 px-lg-5 my-5">
+          <div class="text-center text-white">
+              <img src="/static/images/logo.png" alt="Logo WineApp" style="width: 250px; height: auto;">
+              <h1 class="display-4 fw-bolder">WineApp</h1>
+          </div>
+      </div>
+  </header>
 
 {% endblock cambioCenter %}
 
