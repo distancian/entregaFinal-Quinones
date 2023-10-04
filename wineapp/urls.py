@@ -25,12 +25,6 @@ urlpatterns = [
     path('wine_app/', include('wine_app.urls')),
     path('', lambda request: redirect('wine_app/inicio')),  # Redirigir a la página de inicio
 
-    # path('agrega-cliente/<nombre>/<apellido>/<dni>/<mail>', cliente),
-    # path('agrega-producto/<bodega>/<etiqueta>/<precio>', producto),
-    # path('agrega-vendedor/<nombre>/<apellido>/<legajo>', vendedor),
-    # path('listar_clientes', listar_clientes),
-    # path('listar_productos', listar_productos),
-    # path('listar_vendedores', listar_vendedores),
 ]
 
 urlpatterns+=static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

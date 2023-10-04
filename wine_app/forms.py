@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.models import User
 from .models import Avatar
+from .models import Productos
 
 
 class MensajeForm(forms.Form):
@@ -43,3 +44,13 @@ class AvatarFormulario(forms.ModelForm):
     class Meta:
         model = Avatar
         fields = ("imagen",)
+
+
+
+
+
+
+class ProductoForm(forms.ModelForm):
+    class Meta:
+        model = Productos
+        fields = ['bodega', 'etiqueta', 'precio', 'imagen']        

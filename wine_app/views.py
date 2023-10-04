@@ -13,12 +13,14 @@ from .models import *
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseNotFound
 from django.core.exceptions import ObjectDoesNotExist
-
+from django.shortcuts import render
+from django.http import HttpResponseForbidden
+from .forms import ProductoForm
 
 
 # Create your views here.
@@ -47,15 +49,12 @@ def vendedor(req, nombre, apellido, legajo):
     return HttpResponse(f'''
     <p>Vendedor: {vendedor.nombre}{vendedor.apellido} creado con exito!</P>''')  
 
-################### funciones agregar #########################
-
 @login_required(login_url='/wine_app/login')
 def agregar_producto(req):
-
     print('method', req.method)
     print('POST', req.POST)
     if req.method == 'POST':
-        producto = Productos(bodega=req.POST["bodega"], etiqueta=req.POST["etiqueta"], precio=req.POST["precio"])
+        producto = Productos(bodega=req.POST["bodega"], etiqueta=req.POST["etiqueta"], precio=req.POST["precio"], detalle=req.POST["detalle"], imagen=req.FILES['imagen'])
         producto.save()
         return render(req, "inicio.html")
 
@@ -87,6 +86,8 @@ def agregar_vendedor(req):
 
     else:  
         return render(req, "agregar_vendedor.html")
+    
+
             
 ################### funciones listar #########################
 
@@ -220,6 +221,7 @@ def enviar_mensaje(request):
 
 
 ############## editar perfil ###############
+@login_required(login_url='/wine_app/login')
 
 def editarPerfil(req):
 

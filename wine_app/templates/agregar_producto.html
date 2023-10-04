@@ -20,7 +20,7 @@
 
 {% block contenidoQueCambia %}
 
-<form action="{% url 'agregar_producto' %}" method="post">{% csrf_token %}
+<form action="{% url 'agregar_producto' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
     <div style="text-align: left;">
         <div>
             <label for="bodega" style="display: inline-block; width: 100px; text-align: left;">Bodega:</label>
@@ -32,7 +32,15 @@
         <div>
             <label for="precio" style="display: inline-block; width: 100px; text-align: left;">Precio:</label>
             <input type="text" id="precio" name="precio" style="border: 1px solid #007bff; padding: 5px; border-radius: 5px;">    
+        <div>
+            <label for="detalle" style="display: inline-block; width: 100px; text-align: left;">Detalle:</label>
+            <input type="text" id="detalle" name="detalle" style="border: 1px solid #007bff; padding: 5px; border-radius: 5px;">          
+        
+        <div>
+            <label for="Imagen" style="display: inline-block; width: 100px; text-align: left;">Imagen:</label>
+            <input type="file" id="imagen" name="imagen" style="border: 1px solid #007bff; padding: 5px; border-radius: 5px;">    
     </div>    
+    
 
     <button type="submit"> Enviar </button>
 </form>

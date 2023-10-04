@@ -5,9 +5,7 @@ from django.conf.urls import handler404
 from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
-    path('agrega-cliente/<nombre>/<apellido>/<dni>/<mail>', cliente),
-    path('agrega-producto/<bodega>/<etiqueta>/<precio>', producto),
-    path('agrega-vendedor/<nombre>/<apellido>/<legajo>', vendedor),
+    
     path('listar_clientes', listar_clientes, name='listar_clientes'),
     path('listar_productos', listar_productos, name='listar_productos'),
     path('listar_vendedores', listar_vendedores, name='listar_vendedores'),
