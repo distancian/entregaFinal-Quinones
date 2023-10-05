@@ -21,6 +21,18 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render
 from django.http import HttpResponseForbidden
 from .forms import ProductoForm
+from django.urls import reverse_lazy
+from django.views.generic.edit import UpdateView
+from .models import Productos
+from .forms import ProductoForm
+from django.contrib.auth.decorators import user_passes_test
+from django.shortcuts import render, get_object_or_404
+from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
+from django.views import View
+from django.views.generic.edit import UpdateView
+from .models import Productos
+from .forms import ProductoForm
 
 
 # Create your views here.
@@ -264,3 +276,27 @@ def agregar_avatar(req):
     else:
         miFormulario = AvatarFormulario()
         return render(req,"agregarAvatar.html", {"miFormulario":miFormulario})    
+    
+
+
+############## editar producto ###############
+
+
+# class ProductoUpdateView(UpdateView):
+#     model = Productos
+#     form_class = ProductoForm
+#     template_name = 'editarProducto.html'  
+#     success_url = reverse_lazy('listar_productos')
+
+def is_staff_member(user):
+    return user.is_staff
+
+@method_decorator(user_passes_test(is_staff_member, login_url='/wine_app/login'), name='dispatch')
+class ProductoUpdateView(UpdateView):
+    model = Productos
+    template_name = 'editarProducto.html'
+    fields = ['bodega', 'etiqueta', 'precio', 'imagen'] 
+
+    def get_success_url(self):
+        return reverse_lazy('listar_productos')
+    

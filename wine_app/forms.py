@@ -37,18 +37,11 @@ class UserEditForm(UserChangeForm):
             raise forms.ValidationError("Las contraseñas no coinciden")
         return password2
 
-
-
 class AvatarFormulario(forms.ModelForm):
     
     class Meta:
         model = Avatar
         fields = ("imagen",)
-
-
-
-
-
 
 class ProductoForm(forms.ModelForm):
     class Meta:
