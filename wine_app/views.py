@@ -176,7 +176,7 @@ def login_view (req):
 def registrar(req):
         if req.method == "POST":
           
-                miFormulario = UserChangeForm(req.POST)
+                miFormulario = UserCreationForm (req.POST)
 
                 if miFormulario.is_valid():
               
