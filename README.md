@@ -2,7 +2,14 @@
 
 WineApp es un sitio web que permite cargar productos, clientes y vendedores.
 
-administrador
+
+Samuel (cliente)
+Alta2020
+
+Enzo (staff)
+Alta2020
+
+administrador (staff)
 administrador
 
 http://127.0.0.1:8000/admin/

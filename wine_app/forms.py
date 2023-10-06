@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserChangeForm
+from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django.contrib.auth.models import User
 from .models import Avatar
 from .models import Productos
@@ -20,8 +20,6 @@ class UserEditForm(UserChangeForm):
 
     password1 = forms.CharField(label="Contraseña", widget=forms.PasswordInput)
     password2 = forms.CharField(label="Repetir Contraseña", widget=forms.PasswordInput)
-
-
 
     class Meta:
         model=User
@@ -47,3 +45,11 @@ class ProductoForm(forms.ModelForm):
     class Meta:
         model = Productos
         fields = ['bodega', 'etiqueta', 'precio', 'imagen']        
+
+class CustomUserCreationForm(UserCreationForm):
+    first_name = forms.CharField(max_length=30, required=True, help_text='Requerido. Ingrese su nombre.')
+    last_name = forms.CharField(max_length=30, required=True, help_text='Requerido. Ingrese su apellido.')
+
+    class Meta:
+        model = User  # Reemplaza 'YourUserModel' con el modelo de usuario que estás utilizando
+        fields = UserCreationForm.Meta.fields + ('first_name', 'last_name')

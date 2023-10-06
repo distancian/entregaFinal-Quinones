@@ -2,8 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpRequest
 from .models import Productos, Clientes, Vendedores, Avatar
 from django.contrib import messages
-from .forms import MensajeForm, UserEditForm, UserChangeForm, AvatarFormulario
-
+from .forms import MensajeForm, UserEditForm, UserChangeForm, AvatarFormulario, CustomUserCreationForm
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic import ListView
@@ -61,7 +60,7 @@ def vendedor(req, nombre, apellido, legajo):
     return HttpResponse(f'''
     <p>Vendedor: {vendedor.nombre}{vendedor.apellido} creado con exito!</P>''')  
 
-@login_required(login_url='/wine_app/login')
+@staff_member_required(login_url='/wine_app/login')
 def agregar_producto(req):
     print('method', req.method)
     print('POST', req.POST)
@@ -73,7 +72,7 @@ def agregar_producto(req):
     else:  
         return render(req, "agregar_producto.html")
 
-@login_required(login_url='/wine_app/login')
+@staff_member_required(login_url='/wine_app/login')
 def agregar_cliente(req):
 
     print('method', req.method)
@@ -86,7 +85,7 @@ def agregar_cliente(req):
     else:  
         return render(req, "agregar_cliente.html")
     
-@login_required(login_url='/wine_app/login')
+@staff_member_required(login_url='/wine_app/login')
 def agregar_vendedor(req):
 
     print('method', req.method)
@@ -111,7 +110,7 @@ def inicio(req):
     except:
         return render (req, "inicio.html")
 
-@login_required(login_url='/wine_app/login')
+@staff_member_required(login_url='/wine_app/login')
 def listar_clientes(req):
     lista = Clientes.objects.all()
     return render(req, "listar_clientes.html", {"listar_clientes": lista})
@@ -120,7 +119,7 @@ def listar_productos(req):
     lista = Productos.objects.all()
     return render(req, "listar_productos.html", {"listar_productos": lista})
 
-@login_required(login_url='/wine_app/login')
+@staff_member_required(login_url='/wine_app/login')
 def listar_vendedores(req):
     lista = Vendedores.objects.all()
     return render(req, "listar_vendedores.html", {"listar_vendedores": lista})
@@ -143,7 +142,7 @@ def buscar(req: HttpRequest):
         return HttpResponse (f'no existe..')
     
 ################### funciones listar  #########################
-
+@staff_member_required(login_url='/wine_app/login')
 def listarVendedores(req):
     Vendedor = Vendedores.objects.all
     return render(req, "listarVendedores.html", {"Vendedores" : Vendedor})
@@ -177,13 +176,14 @@ def login_view (req):
 def registrar(req):
         if req.method == "POST":
           
-                miFormulario = UserCreationForm(req.POST)
+                miFormulario = UserChangeForm(req.POST)
 
                 if miFormulario.is_valid():
               
                     data = miFormulario.cleaned_data
                     usuario = data["username"]
                     miFormulario.save()
+
                     return render(req, "inicio.html", {"mensaje": f'{usuario} creado con exito'})   
                 return render(req, "inicio.html", {"mensaje": f'Formulario incorrectos'})
         else:
@@ -197,7 +197,7 @@ def registrar(req):
 def about(request):
     context = {
         'nombre': 'Tu Nombre',
-        'experiencia': 'Más de 15 años en informática',
+        'experiencia': 'Más de 15 años trabajando en informática',
         'estudios': 'Estudiando programación en Python',
     }
     return render(request, 'about.html', context)
@@ -208,6 +208,9 @@ def detalles_producto(request, producto_id):
     producto = get_object_or_404(Productos, id=producto_id)
     return render(request, 'detalles_producto.html', {'producto': producto})
 
+def detalles_vendendor(request, vendedor_id):
+    vendedor = get_object_or_404(Vendedores, id=vendedor_id)
+    return render(request, 'detalles_vendedor.html', {'vendedor': vendedor})
 
 
 
@@ -275,18 +278,10 @@ def agregar_avatar(req):
 
     else:
         miFormulario = AvatarFormulario()
-        return render(req,"agregarAvatar.html", {"miFormulario":miFormulario})    
-    
+        return render (req, "agregarAvatar.html", {"miFormulario" : miFormulario })            
 
 
 ############## editar producto ###############
-
-
-# class ProductoUpdateView(UpdateView):
-#     model = Productos
-#     form_class = ProductoForm
-#     template_name = 'editarProducto.html'  
-#     success_url = reverse_lazy('listar_productos')
 
 def is_staff_member(user):
     return user.is_staff

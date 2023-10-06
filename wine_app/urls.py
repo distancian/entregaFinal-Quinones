@@ -1,6 +1,6 @@
 
 from django.urls import path
-from wine_app.views import editarPerfil, agregar_avatar, enviar_mensaje, page_not_found_view, detalles_producto, about, registrar, login_view, listarVendedores ,cliente, buscar, busquedaProducto, vendedor, producto, listar_clientes, listar_productos, listar_vendedores, inicio, agregar_producto, agregar_cliente, agregar_vendedor
+from wine_app.views import detalles_vendendor, editarPerfil, agregar_avatar, enviar_mensaje, page_not_found_view, detalles_producto, about, registrar, login_view, listarVendedores ,cliente, buscar, busquedaProducto, vendedor, producto, listar_clientes, listar_productos, listar_vendedores, inicio, agregar_producto, agregar_cliente, agregar_vendedor
 from django.conf.urls import handler404
 from django.contrib.auth.views import LogoutView
 from django.urls import path
@@ -27,6 +27,7 @@ urlpatterns = [
     path('inicio', inicio, name='inicio'),
     path('contacto', enviar_mensaje , name='contacto'),
     path('editar-perfil', editarPerfil , name='EditarPerfil'),
+   
     path('Agregar-avatar', agregar_avatar , name='AgregarAvatar'),
     path('producto/editar/<int:pk>/', ProductoUpdateView.as_view(), name='editar_producto'),
     path('producto/detalles/<int:producto_id>/', detalles_producto, name='detalles_producto'),
