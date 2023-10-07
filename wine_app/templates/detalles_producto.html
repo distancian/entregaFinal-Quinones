@@ -7,7 +7,6 @@
 
 {% block cambioCenter %}
 
-
 <body>
 
     <h2>{{ producto.bodega }} {{ producto.etiqueta }}</h2>
@@ -17,10 +16,14 @@
 
     <h6>{{ producto.detalle }}</h6>
     <a href="{% url 'editar_producto' producto.id %}">Editar</a>
-
     
+    <form action="{% url 'eliminar_producto' producto.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit" onclick="return confirm('¿Estás seguro de eliminar este producto?')">Eliminar</button>
+    </form>
 
 </body>
+
 
 {% endblock cambioCenter %}
 
@@ -38,3 +41,34 @@
 
 
 
+
+
+
+ <!-- anterior 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <body>
+
+    <h2>{{ producto.bodega }} {{ producto.etiqueta }}</h2>
+    <h4> Precio: $ {{ producto.precio }} </h4>
+
+    <img src="{{ producto.imagen.url }}" height="250px" alt="{{ producto.nombre }}">
+
+    <h6>{{ producto.detalle }}</h6>
+    <a href="{% url 'editar_producto' producto.id %}">Editar</a>
+
+    
+
+</body>
+    
+    
+    
+    
+    Botón para eliminar el producto -->

@@ -32,7 +32,11 @@ from django.views import View
 from django.views.generic.edit import UpdateView
 from .models import Productos
 from .forms import ProductoForm
-
+from django.shortcuts import get_object_or_404
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+from django.contrib import messages
+from .models import Productos
 
 # Create your views here.
 
@@ -295,3 +299,16 @@ class ProductoUpdateView(UpdateView):
     def get_success_url(self):
         return reverse_lazy('listar_productos')
     
+############## eliminar producto ###############
+
+
+def eliminar_producto(request, producto_id):
+    producto = get_object_or_404(Productos, id=producto_id)
+    
+    if request.method == 'POST':
+        producto.delete()
+        messages.success(request, 'Producto eliminado con éxito.')
+        return HttpResponseRedirect(reverse('listar_productos'))
+
+    return HttpResponseRedirect(reverse('listar_productos', args=[producto.id]))
+
