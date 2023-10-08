@@ -301,10 +301,12 @@ class ProductoUpdateView(UpdateView):
     
 ############## eliminar producto ###############
 
+@login_required(login_url='/wine_app/login')
+@staff_member_required
 
 def eliminar_producto(request, producto_id):
     producto = get_object_or_404(Productos, id=producto_id)
-    
+
     if request.method == 'POST':
         producto.delete()
         messages.success(request, 'Producto eliminado con éxito.')
@@ -312,3 +314,9 @@ def eliminar_producto(request, producto_id):
 
     return HttpResponseRedirect(reverse('listar_productos', args=[producto.id]))
 
+################### 404 ##################
+
+from django.shortcuts import render
+
+def page_not_found_view(request, exception):
+    return render(request, '404.html', status=404)

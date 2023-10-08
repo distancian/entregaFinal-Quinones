@@ -6,6 +6,7 @@ from django.contrib.auth.views import LogoutView
 from django.urls import path
 from .views import ProductoUpdateView, detalles_producto
 from django.contrib.auth.views import LoginView
+from .views import page_not_found_view
 
 
 urlpatterns = [
